@@ -10,8 +10,8 @@ namespace Services1.Server.Services
     internal class EmailService : IEmailService
     {
         private readonly string EmailHost = "smtp.gmail.com";
-        private readonly string EmailUserName = "24x7services.check@gmail.com";
-        private readonly string EmailPassword = "24x7services";
+        private readonly string EmailUserName = "";
+        private readonly string EmailPassword = "";
 
         //public void sendCodeEmail(string to, string s)
         //{
