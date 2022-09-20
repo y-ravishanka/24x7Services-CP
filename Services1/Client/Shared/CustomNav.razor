@@ -1,0 +1,60 @@
+﻿<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="padding-left:40px; padding-right:40px; background-attachment:fixed;">
+    @*<div class="container-fluid">*@
+        <a class="navbar-brand" href="">24x7 Services</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    @*</div>*@
+
+
+    <div class="@NavMenuCssClass navbar-collapse ps-5">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                    @*<span class="oi oi-home" aria-hidden="true"></span>*@ Home
+                </NavLink>
+            </li>
+            <li class="nav-item">
+                <NavLink class="nav-link" href="main/counter">
+                    @*<span class="oi oi-plus" aria-hidden="true"></span>*@ Jobs
+                </NavLink>
+            </li>
+            @*<li class="nav-item">
+                <NavLink class="nav-link" href="signpage">
+                    <span class="oi oi-plus" aria-hidden="true"></span> Login
+                </NavLink>
+            </li>*@
+            <li class="nav-item">
+                <NavLink class="nav-link" href="serviceprofile">
+                    @*<span class="oi oi-plus" aria-hidden="true"></span>*@ Members
+                </NavLink>
+            </li>
+            <li class="nav-item">
+                <div class="text-white">@p</div>
+            </li>
+            
+
+        </ul>  
+    </div>
+</nav>
+
+@code {
+    [Parameter]
+    public int p { get; set; }
+    private bool collapseNavMenu = true;
+    private bool ddmenu;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}
+
+<style>
+    .custom-bg{
+        background-color: rgb(68,68,68,0.9);
+        color: rgb(255,255,255,1);
+    }
+</style>

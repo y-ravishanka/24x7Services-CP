@@ -1,0 +1,72 @@
+﻿@page "/counter"
+@page "/main/counter"
+@inject NavigationManager navigate
+@using Services1.Client.Components
+
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Navigate To</h1>
+
+
+<button class="btn btn-primary" @onclick="(e=>clickme(0))">Index</button><br />
+<button class="btn btn-primary" @onclick="(e=>clickme(1))">User Profile</button><br />
+<button class="btn btn-primary" @onclick="(e=>clickme(2))">Search Result</button><br />
+<button class="btn btn-primary" @onclick="(e=>clickme(3))">Sign In</button><br />
+<button class="btn btn-primary" @onclick="@onClickEditBasic">Modal Testing</button><br />
+<button class="btn btn-primary" @onclick="(e=>clickme(4))">job result</button><br />
+<button class="btn btn-primary" @onclick="(e=>clickme(5))">Admin Dashboard</button><br />
+<button class="btn btn-primary" @onclick="(e=>clickme(6))">Services Provider Search</button><br />
+
+
+@if(editmodalBasic)
+{
+    <ModalTesting onClose="@onEditDasicClose"></ModalTesting>
+}
+
+@code {
+    private string link = "";
+
+    private void clickme(int i)
+    {
+        switch (i)
+        {
+            case 0:
+                link = "";
+                break;
+            case 1:
+                link = "main/userprofile";
+                break;
+            case 2:
+                link = "main/search";
+                break;
+            case 3:
+                link = "signin";
+                break;
+            case 4:
+                link = "main/searchresult";
+                break;
+            case 5:
+                link = "admin/admindashboard";
+                break;
+            case 6:
+                link = "main/serviceprofile";
+                break;
+        }
+        navigate.NavigateTo(link);
+    }
+
+    public bool editmodalBasic { get; set; }
+
+    private void onClickEditBasic()
+    {
+        editmodalBasic = true;
+        StateHasChanged();
+    }
+
+    private void onEditDasicClose(bool pesp)
+    {
+        editmodalBasic = false;
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,104 @@
+﻿
+@page "/locationinfo";
+@using System.Globalization;
+@using Services1.Client.Components;
+
+<PageTitle>User Profile - Location Info</PageTitle>
+
+<h3>Location Information</h3>
+<div class="row">
+    <div class="col-md-6 p-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-title">Basic Location Information</div>
+                <div class="card-header-info">this infomation will be shown in your profile</div>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid edit-buttons-move w-100">
+                    <button class="none_button edit-buttons" @onclick="@onClickLocation"><span class="oi oi-wrench"></span> Edit</button>
+                </div>
+                Province : <br />
+                <label>your Province here</label><br />
+                District :<br />
+                <label>your District here</label><br />
+                Town :<br />
+                <label>your Town here</label><br />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 p-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-title">Residential Information</div>
+                <div class="card-header-info">this information will be hidden from users</div>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid edit-buttons-move w-100">
+                    <button class="none_button edit-buttons" @onclick="@onClickResidential"><span class="oi oi-wrench"></span> Edit</button>
+                </div>
+                Address : <br />
+                <label>your Address here</label><br />
+                Postal Code :<br />
+                <label>your Postal Code here</label><br />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 p-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-title">Location Map Coordinates</div>
+                <div class="card-header-info">this information will be hidden from users</div>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid edit-buttons-move w-100">
+                    <button class="none_button edit-buttons"><span class="oi oi-wrench"></span> Edit</button>
+                </div>
+                @*<img class="img-fluid mt-2" src="/img/bg1.jpg">*@
+                @*@*<div id="map" style="height:500px;width:100%;"></div>*@
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@if(locationmodal)
+{
+    <ModalUserBasicLocation onClose="@onCloseLocation"></ModalUserBasicLocation>
+}
+@if(residentialmodal)
+{
+    <ModalUserResidential onClose="@onCloseResidential"></ModalUserResidential>
+}
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    private bool locationmodal { get; set; }
+    private bool residentialmodal { get; set; }
+
+    private void onClickLocation()
+    {
+        locationmodal = true;
+        StateHasChanged();
+    }
+
+    private void onCloseLocation()
+    {
+        locationmodal = false;
+        StateHasChanged();
+    }
+
+    private void onClickResidential()
+    {
+        residentialmodal = true;
+        StateHasChanged();
+    }
+
+    private void onCloseResidential()
+    {
+        residentialmodal = false;
+        StateHasChanged();
+    }
+}

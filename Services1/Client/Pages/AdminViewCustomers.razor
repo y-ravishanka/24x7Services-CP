@@ -1,0 +1,39 @@
+﻿
+@page "/admin/adminviewcustomers"
+
+<PageTitle>Customers</PageTitle>
+
+<div>
+
+<div class="row report_top_row pb-2">
+    <div class="container-fluid">
+        <div class="row">
+            <h1>Customers</h1>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="container-fluid content_center ps-5">
+        <table class="table">
+            <tbody>
+                @for ( int i = 0; i < 100; ++i)
+               {
+                   
+                   <tr>
+                    <td>Yasas Lokukankanamge</td>
+                    <td>564835121</td>
+                    <td><button class="my-button-dark rounded">view</button></td>
+                </tr>
+               }
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+</div>
+
+@code {
+
+}

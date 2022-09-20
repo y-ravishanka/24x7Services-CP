@@ -1,0 +1,88 @@
+﻿
+@inherits LayoutComponentBase
+@inject HttpClient http
+@inject ITestService ser
+
+@inject NavigationManager _navManager
+
+@if (_navManager.Uri.Contains("winforms"))
+{
+
+}
+else
+{
+
+}
+
+@page "/clayout"
+
+<div class="">
+
+    <div class="top_row">
+        @if(server == false)
+        {
+            <div class="content_center bg-dark w3-text-gray"><span class="oi oi-warning"></span> There is no internet connection</div>
+        }
+        <CustomNav/>
+    </div>
+
+    <article class="content px-4">
+        @Body
+    </article>
+
+</div>
+
+@code {
+    private static System.Timers.Timer aTimer;
+    private int counter = 5;
+    private bool server = true;
+    private int check = 1;
+    private string error = "";
+    private string msg = "";
+    private TestData? test;
+
+    protected override void OnInitialized()
+    {
+        StartTimer();
+    }
+
+    private void StartTimer()
+    {
+        aTimer = new System.Timers.Timer(1000);
+        aTimer.Elapsed += CountDownTimer;
+        aTimer.Enabled = true;
+    }
+
+    private void CountDownTimer(Object source, System.Timers.ElapsedEventArgs e)
+    {
+        if (counter > 0)
+        {
+            counter -= 1;
+        }
+        else
+        {
+            counter = 5;
+            //CheckServerStatus();
+        }
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async void CheckServerStatus()
+    {
+        try
+        {
+            //test = await http.GetFromJsonAsync<TestData>("api/Test/testConnection");
+            //server = test.test2;
+            //msg = test.test;
+            server = await ser.CheckServerConnection();
+            msg = server.ToString();
+            ++check;
+        }
+        catch (Exception e)
+        {
+            error = e.Message;
+            --check;
+            server = false;
+        }
+    }
+}

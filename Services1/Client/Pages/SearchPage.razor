@@ -1,0 +1,138 @@
+﻿
+@page "/search"
+@page "/main/search"
+@inject NavigationManager navigate
+
+<PageTitle>Search Result</PageTitle>
+
+<div class="cus_back_color">
+<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid cus_back_color_2 my-3 px-3">
+            <h1>Search Jobs</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid ">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="container-fluid m-2 py-5 cus_back_color_2 cus_block_border">
+                        <div class="row">
+                            <button class="btn btn-dark w-100 my-2">Search</button>
+                        </div>
+                        <div class="row">
+                            <label>Job :</label>
+                            <input class="form-control w-100 mb-2" />
+                        </div>
+                        <div class="row">
+                            <label>Search By :</label>
+                            <select class="w-100 px-1 my-1 py-1" @onchange="changesearch">
+                                <option selected value="0">Job Only</option>
+                                <option value="1">Job and Province</option>
+                                <option value="2">Job, Province and District</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <select class="w-100 px-1 my-1 py-1" @onchange="changeprovince">
+                                <option disabled selected>-- select a province --</option>
+                                @for(int h = 0;h<province.Count;++h)
+                                {
+                                    <option value="@h">@province[h]</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="row">
+                            <select class="w-100 px-1 my-1 py-1" @onchange="changedistrict">
+                                <option disabled selected>-- select a district --</option>
+                                @for(int h = 0;h<distric[selectedprovi].Length;++h)
+                                {
+                                    <option value="@h">@distric[selectedprovi][h]</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="container-fluid m-2 cus_back_color_2 cus_block_border pb-1">
+
+                        <div class="container-fluid cus_bottom_border px-3 py-2">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Number of jobs found
+                                </div>
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid px-3 cus_bottom_border">
+                            <div class="row">
+                                <div class="col-md-9 pe-1">
+                                    <div class="row py-3">
+                                        <div>Tile of the job <span class="px-3">Closing Date : Days left for the job</span> </div>
+                                        <div></div>
+                                    </div>
+                                    <div class="row pb-3">
+                                        <p>little description about the job</p>
+                                    </div>
+                                    <div class="row pb-3">
+                                        <div class="cus_inline_list">
+                                            <label>key word 1</label>
+                                            <label>key word 2</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 ps-1">
+                                    <div class="row py-2">
+                                        price
+                                    </div>
+                                    <div class="row py-2">
+                                        bits
+                                    </div>
+                                    <div class="row py-2">
+                                        <button class="btn btn-dark" style="width:100px;">View</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+</div>
+@code {
+    private readonly DataModal dataModal = new DataModal();
+    private List<string> province = new();
+    private List<string[]> distric = new();
+    private int i, j;
+    private int selectedprovi;
+    private int selecteddis;
+    private int searchby;
+
+    protected override void OnInitialized()
+    {
+        province = dataModal.GetProvince();
+        distric = dataModal.GetDistrict();
+    }
+
+    private void changesearch(ChangeEventArgs e)
+    {
+        searchby = Convert.ToInt32(e.Value);
+    }
+
+    private void changeprovince(ChangeEventArgs e)
+    {
+        selectedprovi = Convert.ToInt32(e.Value);
+    }
+
+    private void changedistrict(ChangeEventArgs e)
+    {
+        selecteddis = Convert.ToInt32(e.Value);
+    }
+}

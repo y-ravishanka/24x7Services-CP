@@ -1,0 +1,154 @@
+﻿
+@page "/about";
+@using System.Globalization;
+@using Services1.Client.Components;
+
+<PageTitle>User Profile - About</PageTitle>
+
+<h3>About</h3>
+<div class="row">
+    <div class="col-md-6 p-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-title">Basic Information</div>
+                <div class="card-header-info">some information will be visible to the other people using this web service</div>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid edit-buttons-move w-100">
+                    <button class="none_button edit-buttons" @onclick="@onClickEditBasic"><span class="oi oi-wrench"></span> Edit</button>
+                </div>
+                Name : <br />
+                <label>your name here</label><br />
+                Display Name :<br />
+                <label>your user name here</label><br />
+                NIC :<br />
+                <label>your user name here</label><br />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 p-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-title">Contact Information</div>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid edit-buttons-move w-100">
+                    <button class="none_button edit-buttons" @onclick="@onClickContact"><span class="oi oi-wrench"></span> Edit</button>
+                </div>
+                Email : <br />
+                <label>your emal here</label><br />
+                Phone Number :<br />
+                <label>your phone number here</label><br />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 p-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-title">About You</div>
+                <div class="card-header-info">brief information about you and your praferences</div>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid edit-buttons-move w-100">
+                    <button class="none_button edit-buttons" @onclick="@onClickGeneral"><span class="oi oi-wrench"></span> Edit</button>
+                </div>
+                Gender :<br />
+                <label>male/female</label><br />
+                Bio :<br />
+                <label>brief senteces about you awdilwhaudw akdjnaUKa ildwakndk,wahk wajdlwal wiajdla kkandwa oa;dmwa ma;odadnwai andinwaw</label><br />
+                Your Interests :<br />
+                <label>your interests</label><br />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 p-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-title">Password</div>
+            </div>
+            <div class="card-body">
+                Change Your Password<br /><br />
+                <button class="my-button-dark" @onclick="@onClickCpass">Change</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if(editmodalBasic)
+{
+    <ModalUserAboutBasic onClose="@onEditDasicClose"></ModalUserAboutBasic>
+}
+
+@if(generalmodal)
+{
+    <ModalUserGeneralInfo onClose="@onGeneralClose"></ModalUserGeneralInfo>
+}
+
+@if(changepass)
+{
+    <ModalChangePassword onClose="@onCpassClose"></ModalChangePassword>
+}
+
+@if(contactmodal)
+{
+    <ModalUserContacts onClose="@onContactClose"></ModalUserContacts>
+}
+
+@code{
+    [Parameter]
+    public int id { get; set; }
+    private bool editmodalBasic { get; set; }
+    private bool generalmodal { get; set; }
+    private bool changepass { get; set; }
+    private bool contactmodal { get; set; }
+
+    private void onClickContact()
+    {
+        contactmodal = true;
+        StateHasChanged();
+    }
+
+    private void onContactClose(bool pesp)
+    {
+        contactmodal = false;
+        StateHasChanged();
+    }
+
+    private void onClickCpass()
+    {
+        changepass = true;
+        StateHasChanged();
+    }
+
+    private void onCpassClose(bool pesp)
+    {
+        changepass = false;
+        StateHasChanged();
+    }
+
+    private void onClickEditBasic()
+    {
+        editmodalBasic = true;
+        StateHasChanged();
+    }
+
+    private void onEditDasicClose(bool pesp)
+    {
+        editmodalBasic = false;
+        StateHasChanged();
+    }
+
+    private void onClickGeneral()
+    {
+        generalmodal = true;
+        StateHasChanged();
+    }
+
+    private void onGeneralClose(bool pesp)
+    {
+        generalmodal = false;
+        StateHasChanged();
+    }
+}

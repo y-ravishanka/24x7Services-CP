@@ -1,0 +1,22 @@
+﻿
+.cus_back_color {
+    background-color: #F7F7F7;
+}
+
+.cus_back_color_2 {
+    background-color: white;
+}
+
+.cus_block_border {
+    border: 0.5px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+
+.cus_bottom_border {
+    border-bottom: 0.5px solid rgba(0,0,0,0.5);
+}
+
+.cus_inline_list label {
+    padding-left: 10px;
+    padding-left: 10px;
+}

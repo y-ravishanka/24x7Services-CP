@@ -1,0 +1,41 @@
+﻿
+@page "/super/activeadmin"
+@inject IAdminService ser;
+
+<PageTitle>Inactive Admins</PageTitle>
+
+<div class="row">
+    <h1 class="fw-bold">Inactive Admins</h1>
+</div>
+
+<div class="row">
+    <div class="container-fluid content_center ps-5">
+        <table class="table">
+            <tbody>
+                @foreach (UsersData data in admins)
+                {
+                    var local_i = data.id;
+                    <tr>
+                        <td>@data.id</td>
+                        <td>@data.email</td>
+                        <td><button class="my-button-dark rounded" @onclick="@(e=>(ActiveAdmin(local_i)))" >view</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    private List<UsersData> admins = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        admins = await ser.GetInactiveAdmins();
+    }
+
+    private async Task ActiveAdmin(int id)
+    {
+        bool _ = await ser.ActiveAdmins(id);
+    }
+}

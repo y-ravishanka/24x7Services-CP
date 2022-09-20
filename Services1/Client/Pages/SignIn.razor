@@ -1,0 +1,84 @@
+﻿
+@page "/signin"
+
+<div class= "container-fluid" style="height: 88vh;">
+    <div class="row">
+
+        <div class="container-fluid pt-3 ps-2">
+            <button class="none_button py-2"><span class="oi oi-chevron-left"></span> Back</button>
+        </div>
+
+    </div>
+    <div class="row">
+        <EditForm Model="user" OnValidSubmit="onsubmition">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+        <div class="w3-container px-5 pb-5 pt-3">
+            <div class="w3-content login-window mb-3">
+                <div class="card containt-center py-3">
+                    <img class="login-pic" src="/img/user1.png">
+                    <h2>LogIn</h2>
+                    <div class="container-fluid px-5 py-2" style="border-bottom: 0.5px solid rgba(0,0,0,0.2);">
+                        <div class="mb-3">
+                            <div class="input-group ">
+                                <span for="username" class="input-group-text"><span class="oi oi-person"></span></span>
+                                <InputText id="username" @bind-Value="user.username" class="form-control" placeholder="User Email"></InputText>
+                            </div>
+                            <ValidationMessage For="() => user.username"></ValidationMessage>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span for="password" class="input-group-text"><span class="oi oi-key"></span></span>
+                                <InputText type="password" id="password" @bind-Value="user.password" class="form-control" placeholder="Password"></InputText>
+                            </div>
+                            <ValidationMessage For="() => user.password"></ValidationMessage>
+                        </div>
+                        <div class="containt-center">
+                            <button type="submit" class="btn my-button-dark">Login</button><br />
+                        </div>
+                        <div class="my-3">
+                            <button class="my-button" @onclick="@clickForgottenPW">Forget Password?</button><br />
+                            <button class="my-button" @onclick="@clickCAccount">New Here? Create an Account</button>
+                        </div>
+                    </div>
+                    <div class="container-fluid containt-center px-5">
+                        <h5>Login with Alternative Methods</h5>
+                    </div>
+                    <div class="container-fluid px-5 py-2" style="border-top: 0.5px solid rgba(0,0,0,0.2);"></div>
+                </div>
+            </div>
+        </div>
+        </EditForm>
+    </div>
+    
+        
+    
+</div>
+
+@code {
+    private string? username;
+    private string? password;
+    private UserLoginModel user = new();
+    private UsersData data = new();
+    private int nav = 0;
+
+    private void onsubmition()
+    {
+        data.email = user.username;
+        data.password = user.password;
+    }
+
+    private void clickForgottenPW ()
+    {
+
+    }
+
+    private void clickCAccount()
+    {
+
+    }
+
+    private void closeLogin()
+    {
+        
+    }
+}

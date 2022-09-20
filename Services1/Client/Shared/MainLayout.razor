@@ -1,0 +1,431 @@
+﻿@inherits LayoutComponentBase
+@page "/mainlayout"
+
+@inject NavigationManager _navManager
+@inject HttpClient http
+@inject ITestService ser
+
+
+<div class="top_row">
+    @if(server == false)
+    {
+        <div class="content_center bg-dark w3-text-gray"><span class="oi oi-warning"></span> There is no internet connection</div>
+    }
+</div>
+
+@if(nav == 0)
+{
+    @if (_navManager.Uri.Contains("main"))
+    {
+        <div class="page">
+            <div class="sidebar">
+                <NavMenu />
+            </div>
+
+            <main>
+                @*<div class="top-row px-4">
+                    <a href="" target="_blank">About</a>
+                </div>*@
+
+                <article class="content px-4">
+                    @Body
+                </article>
+            </main>
+        </div>
+    }
+    else if (_navManager.Uri.Contains("admin"))
+    {
+        <div class="page">
+            <div class="sidebar">
+                <AdminNev />
+            </div>
+
+            <main>
+                @*<div class="top-row px-4">
+                    <a href="" target="_blank">About</a>
+                </div>*@
+
+                <article class="content px-4">
+                    @Body
+                </article>
+            </main>
+        </div>
+    }
+    else if(_navManager.Uri.Contains("super"))
+    {
+        <div class="page">
+            <div class="sidebar">
+                <AdminNev />
+            </div>
+
+            <main>
+                @*<div class="top-row px-4">
+                    <a href="" target="_blank">About</a>
+                </div>*@
+
+                <article class="content px-4">
+                    @Body
+                </article>
+            </main>
+        </div>
+    }
+    else
+    {
+        <div class="">
+
+            <div class="top_row">
+                @*@if(server == false)
+                {
+                    <div class="content_center bg-dark w3-text-gray"><span class="oi oi-warning"></span> There is no internet connection</div>
+                }*@
+                <CustomNav p="@id"/>
+                <div class="row">
+                    <div class="container-fluid py-2 px-3 right-close-button">
+                        <div class="cus_container cus_shadow">                        
+                            <button class="cus_login_but" @onclick="@(e=>on1(1))">LogIn</button>
+                            <button class="cus_login_but" @onclick="@ToCreateAccout">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <article class="content px-4">
+                @Body
+            </article>
+
+        </div>
+    }
+}
+else if (nav == 1)
+{
+    if(fp == 0)
+    {
+        <div class= "container-fluid" style="height: 88vh;">
+            <div class="row">
+
+                <div class="container-fluid pt-3 ps-2">
+                    <button class="none_button py-2"><span class="oi oi-chevron-left"></span> Back</button>
+                </div>
+
+            </div>
+            <div class="row">
+                <EditForm Model="user" OnValidSubmit="onsubmition">
+                    <DataAnnotationsValidator></DataAnnotationsValidator>
+                <div class="w3-container px-5 pb-5 pt-3">
+                    <div class="w3-content login-window mb-3">
+                        <div class="card containt-center py-3">
+                            <img class="login-pic" src="/img/user1.png">
+                            <h2>LogIn</h2>
+                            <div class="container-fluid px-5 py-2" style="border-bottom: 0.5px solid rgba(0,0,0,0.2);">
+                                <div class="mb-3">
+                                    <div class="input-group ">
+                                        <span for="username" class="input-group-text"><span class="oi oi-person"></span></span>
+                                        <InputText id="username" @bind-Value="user.username" class="form-control" placeholder="User Email"></InputText>
+                                    </div>
+                                    <ValidationMessage For="() => user.username"></ValidationMessage>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <span for="password" class="input-group-text"><span class="oi oi-key"></span></span>
+                                        <InputText type="password" id="password" @bind-Value="user.password" class="form-control" placeholder="Password"></InputText>
+                                    </div>
+                                    <ValidationMessage For="() => user.password"></ValidationMessage>
+                                </div>
+                                <div class="containt-center">
+                                    <button type="submit" class="btn my-button-dark">Login</button><br />
+                                </div>
+                                <div class="my-3">
+                                    <button class="my-button" @onclick="@clickForgottenPW">Forget Password?</button><br />
+                                    <button class="my-button" @onclick="@clickCAccount">New Here? Create an Account</button>
+                                </div>
+                            </div>
+                            <div class="container-fluid containt-center px-5">
+                                <h5>Login with Alternative Methods</h5>
+                            </div>
+                            <div class="container-fluid px-5 py-2" style="border-top: 0.5px solid rgba(0,0,0,0.2);"></div>
+                        </div>
+                    </div>
+                </div>
+                </EditForm>
+            </div>     
+    
+        </div>
+    }
+    else
+    {
+        <div class="container-fluid">
+            <div class= "container-fluid" style="height: 88vh;">
+                <div class="row">
+
+                    <div class="container-fluid pt-3 ps-2">
+                        <button class="none_button py-2" @onclick="@ToIndex"><span class="oi oi-chevron-left"></span> Back</button>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="w3-container px-5 pb-5 pt-3">
+                        <div class="w3-content login-window mb-3">
+                            <div class="card containt-center py-3">
+                                <img class="login-pic" src="/img/user1.png">
+                                <h2>Reset Password</h2>
+                                <div class="container-fluid px-5 py-2">
+
+                                    <div class="form-group mb-3">
+                                        <label for="nic">User NIC :</label><br />
+                                        <input type="text" id="nic" @bind="nic" class="form-control"></input>
+                                    </div>
+                                    <div class="right-close-button">
+                                        <button class="btn my-button-dark">@butemailsent</button>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="code">Reset Code :</label><br />
+                                        <input type="text" id="code" @bind="ccode" class="form-control" required></input>
+                                    </div>
+                                    <div class="containt-center">
+                                        <button class="btn my-button-dark mx-1">Back</button>
+                                        <button type="submit" class="btn my-button-dark mx-1">Reset</button>
+                                    </div>
+
+                                    <EditForm Model="@reset">
+                                        <DataAnnotationsValidator/>
+                                        <div class="form-group mb-3">
+                                            <label for="npassword">New Password :</label><br />
+                                            <InputText type="password" id="npassword" @bind-Value="reset.password" class="form-control"></InputText>
+                                            <ValidationMessage For="() => reset.password"></ValidationMessage>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="cpassword">Confirm Password :</label><br />
+                                            <InputText type="password" id="cpassword" @bind-Value="reset.cpassword" class="form-control"></InputText>
+                                            <ValidationMessage For="() => reset.cpassword"></ValidationMessage>
+                                        </div>
+                                        <div class="containt-center">
+                                            <button class="btn my-button-dark mx-1">Back</button>
+                                            <input type="submit" class="btn my-button-dark" value="Save"/>
+                                        </div>
+                                    </EditForm>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+}
+else if (nav == 2)
+{
+    if (sid == 0)
+    {
+        <div class="container-fluid">
+            <div class= "container-fluid" style="height: 88vh;">
+                <div class="row">
+
+                    <div class="container-fluid pt-3 ps-2">
+                        <button class="none_button py-2" @onclick="@ToIndex"><span class="oi oi-chevron-left"></span> Back</button>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="w3-container px-5 pb-5 pt-3">
+                        <div class="w3-content login-window mb-3">
+                            <div class="card containt-center py-3">
+                                <img class="login-pic" src="/img/user1.png">
+                                <h2>Create an Account</h2>
+                                <div class="container-fluid px-5 py-2">
+                                    <EditForm Model="@sign" OnValidSubmit="@submit">
+                                        <DataAnnotationsValidator/>
+                                        <div class="form-group mb-3">
+                                            <label for="username">User Email :</label><br />
+                                            <InputText @bind-Value=sign.username id="username" class="form-control "></InputText>
+                                            <ValidationMessage For="() => sign.username"></ValidationMessage>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="password">Password :</label><br />
+                                            <InputText type="password" @bind-Value=sign.password id="password" class="form-control "></InputText>
+                                            <ValidationMessage For="() => sign.password"></ValidationMessage>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="cpassword">Confirm Password :</label><br />
+                                            <InputText type="password" @bind-Value=sign.cpassword id="cpassword" class="form-control "></InputText>
+                                            <ValidationMessage For="() => sign.cpassword"></ValidationMessage>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="text-warning">@cpass</label>
+                                        </div>
+                                        <div class="containt-center">
+                                            <input type="submit" class="btn my-button-dark" value="Create"/><br />
+                                            @*<button type="submit" class="btn my-button-dark">Login</button>*@
+                                        </div>
+                                    </EditForm>
+                                    <div class="my-3">
+                                        <button class="my-button" >have an Account, LogIn</button><br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        
+    }
+}
+<Footer></Footer>
+        
+
+
+@code {
+    private int id = 0;
+    private int nav = 0;
+    private int sid = 0;
+    private int fp = 0;
+    private string? resetcode;
+    private string? nic;
+    private string? ccode;
+    private string cpass;
+    private string butemailsent = "Sent";
+    private UserSignInModel sign = new UserSignInModel();
+    private UserResetPasswordModel reset = new();
+    private string? username;
+    private string? password;
+    private UserLoginModel user = new();
+    private UsersData data = new();
+    //private int nav = 0;
+    private static System.Timers.Timer aTimer;
+    private int counter = 5;
+    private bool server = true;
+    private int check = 1;
+    private string error = "";
+    private string msg = "";
+    private TestData? test;
+
+    protected override void OnInitialized()
+    {
+        StartTimer();
+    }
+
+    private void StartTimer()
+    {
+        aTimer = new System.Timers.Timer(1000);
+        aTimer.Elapsed += CountDownTimer;
+        aTimer.Enabled = true;
+    }
+
+    private void CountDownTimer(Object source, System.Timers.ElapsedEventArgs e)
+    {
+        if (counter > 0)
+        {
+            counter -= 1;
+        }
+        else
+        {
+            counter = 5;
+            //CheckServerStatus();
+        }
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async void CheckServerStatus()
+    {
+        try
+        {
+            //test = await http.GetFromJsonAsync<TestData>("api/Test/testConnection");
+            //server = test.test2;
+            //msg = test.test;
+            server = await ser.CheckServerConnection();
+            msg = server.ToString();
+            ++check;
+        }
+        catch (Exception e)
+        {
+            error = e.Message;
+            --check;
+            server = false;
+        }
+    }
+
+    private void onsubmition()
+    {
+        data.email = user.username;
+        data.password = user.password;
+    }
+
+    private void clickForgottenPW ()
+    {
+        fp = 1;
+        StateHasChanged();
+    }
+
+    private void clickCAccount()
+    {
+        nav = 2;
+        sid = 0;
+        StateHasChanged();
+    }
+
+    private void closeLogin()
+    {
+        
+    }
+
+    private void clearCode()
+    {
+        resetcode = null;
+        fp = 0;
+    }
+
+    private void on1(int t)
+    {
+        id = t;
+    }
+
+    private void ToIndex()
+    {
+        nav = 0;
+        StateHasChanged();
+    }
+
+    private void ToCreateAccout()
+    {
+        nav = 2;
+        sid = 0;
+        StateHasChanged();
+    }
+
+    private void submit()
+    {
+        if(sign.password == sign.cpassword)
+        {
+            Console.WriteLine("valid submit");
+            cpass = "";
+        }
+        else
+        {
+            cpass = "Password and Confirm Password doesn't match";
+        }
+    }
+}
+
+@*<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>*@

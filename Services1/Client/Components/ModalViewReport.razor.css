@@ -1,0 +1,19 @@
+﻿
+.none_button {
+    background-color: white;
+    border: none;
+    border-style: none;
+}
+
+.my-button-dark {
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #212529;
+    color: #FFFFFF;
+    width: 125px;
+}
+
+    .my-button-dark:hover {
+        background-color: #6B6A6A;
+    }

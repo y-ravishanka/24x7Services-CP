@@ -1,0 +1,134 @@
+﻿
+.page-custom {
+    color: #212529;
+}
+
+.box_container {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+.login-window {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 10px 20px #212529;
+    border-radius: 10px;
+}
+
+    .login-window hr {
+        color: rgba(0,0,0,0.2);
+        width: 1px;
+    }
+
+.singin_window {
+    position: relative;
+    width: 100%;
+    max-width: 762px;
+    box-shadow: 0 10px 20px #212529;
+    border-radius: 10px;
+}
+
+.containt-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-close-button {
+    display: flex;
+    justify-content: right;
+    align-items: flex-end;
+}
+
+/*.input-group {
+    position: relative;
+}
+
+input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #212529;
+    outline: none;
+    background-color: transparent;
+    color: inherit;
+}
+
+.input-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: .3s ease-out;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label {
+    transform: translateY(-18px);
+    color: #6B6A6A;
+    font-size: .8rem;
+}*/
+
+.login-pic {
+    width: 96px;
+    height: auto;
+    border-radius: 50%;
+    background: rgb(33,37,41,0.8);
+}
+
+.my-button-dark {
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #212529;
+    color: #FFFFFF;
+    width: 125px;
+}
+
+    .my-button-dark:hover {
+        background-color: #6B6A6A;
+    }
+
+.my-button {
+    font-size: 12px;
+    background: none;
+    border: none;
+}
+
+    .my-button:hover {
+        font-size: 13px;
+        color: #6B6A6A;
+        border-bottom: 1px solid #212529;
+    }
+
+.back-button-position {
+    justify-content: left;
+    align-items: flex-start;
+}
+
+.back-button {
+    background: none;
+    border: none;
+}
+
+    .back-button:hover {
+        background: #E9E9E9;
+        border-radius: 10px;
+    }
+
+.none_button {
+    background: none;
+    border: none;
+    width: 100px;
+}
+
+    .none_button:hover {
+        border: 0.5px solid rgba(0,0,0,0.2);
+        border-radius: 4px;
+    }

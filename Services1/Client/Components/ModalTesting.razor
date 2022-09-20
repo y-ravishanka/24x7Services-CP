@@ -1,0 +1,82 @@
+﻿
+@using Services1.Client.Services;
+@using Services1.Client.Models;
+@inject ITestService ser
+
+<div class="modal fade show" id="myModal" style="display:block; background-color: rgba(10,10,10,.8);" aria-modal="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h4 class="modal-title">This is the title</h4>
+                <button class="close none_button" @onclick="@modalCancel"><span class="oi oi-x"></span></button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="@test">
+                    <DataAnnotationsValidator/>
+                    <ValidationSummary/>
+                    <div class="">
+                        <label for="id">ID</label>
+                        <InputNumber @bind-Value=test.id id="id" class="" />
+                    </div>
+                    <div class="">
+                        <label for="name">Name</label>
+                        <InputText @bind-Value=test.name id="name" class="" />
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Save"/>
+                </EditForm>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-dark" @onclick="@saveData">Ok</button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<bool> onClose { get; set; }
+
+    TestModal test = new TestModal();
+
+    private UserBasicModel user = new();
+
+    private string t = "no result";
+
+    protected override void OnInitialized()
+    {
+        saveData();
+        StateHasChanged();
+    }
+
+    private async void saveData()
+    {
+        //try
+        //{
+        //    t = await ser.TestDatabase();
+        //    if(t == null)
+        //    {
+        //        t = "is a null";
+        //    }
+        //    Console.WriteLine(t);
+        //    StateHasChanged();
+        //}
+        //catch (Exception ex)
+        //{
+        //    Console.WriteLine(ex.Message);
+
+        //}
+    }
+
+    private Task modalOk()
+    {
+        saveData();
+        return onClose.InvokeAsync(true);
+    }
+
+    private Task modalCancel()
+    {
+        return onClose.InvokeAsync(false);
+    }
+}

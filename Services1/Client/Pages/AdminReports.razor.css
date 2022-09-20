@@ -1,0 +1,73 @@
+﻿.my-button-dark {
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #212529;
+    color: #FFFFFF;
+    width: 125px;
+    border: none;
+    border-style: none;
+    border-radius: 4px;
+}
+
+    .my-button-dark:hover {
+        background-color: #6B6A6A;
+    }
+
+.content_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.report_view_btn {
+    width: 100px;
+    height: 30px;
+}
+
+/*.my-button-dark {
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #212529;
+    color: #FFFFFF;
+    width: 125px;
+}
+
+    .my-button-dark:hover {
+        background-color: #6B6A6A;
+    }*/
+
+.admin_reload_btn {
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    color: #212529;
+    width: 125px;
+    border: none;
+    border-style: none;
+}
+
+    .admin_reload_btn:hover {
+        background-color: #212529;
+        color: #FFFFFF;
+    }
+
+.edit-buttons-move {
+    display: flex;
+    justify-content: right;
+    align-items: flex-end;
+}
+
+.report_background {
+    background-color: #CED4DA;
+}
+
+.report_top_row {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
+}

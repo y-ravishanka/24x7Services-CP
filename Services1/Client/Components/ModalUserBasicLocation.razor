@@ -1,0 +1,113 @@
+﻿
+<div class="modal fade show" id="myModal" style="display:block; background-color: rgba(10,10,10,.8);" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Basic Location Information</h4>
+                <button class="close none_button" @onclick="@modalCancel"><span class="oi oi-x"></span></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label>Province :</label><br />
+                    <select class="form-select" @onchange="onChangeProvince">
+                        @for(int i=0;i<@provinceList.Count;++i)
+                        {
+                            @if(provinceList[i] == location.province)
+                            {
+                                <option value="@i" selected>@provinceList[i]</option>
+                                continue;
+                            }
+                            <option value="@i">@provinceList[i]</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label>District :</label><br />
+                    <select class="form-select" @onchange="onChangeDistrict">
+                        @for(int i=0;i<@districtList[0].Length;++i)
+                        {
+                            <option value="@i">@districtList[0][i]</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>Town :</label><br />
+                    <input type="text" class="form-control" @bind-value="@town" style="@css1" @onfocusout="onChangeTown"/>
+                    <label class="warning1">@warning1</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button @onclick="@modalCancel" class="btn my-button-dark">Cancel</button>
+                <button @onclick="@saveData" class="btn my-button-dark">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<bool> onClose { get; set; }
+    [Parameter]
+    public int id { get; set; }
+
+    private string province;
+    private string district;
+    private string town;
+    private string? css1 = null;
+    private string? warning1 = null;
+    private int selectProvince;
+    private int selectDistrict;
+    private List<string> provinceList;
+    private List<string[]> districtList;
+    private DataModal data = new();
+
+    private UserLocationData location = new();
+
+    protected override void OnInitialized()
+    {
+        location.province = "Uva";
+        provinceList = data.GetProvince();
+        districtList = data.GetDistrict();
+    }
+
+    private void onChangeProvince(ChangeEventArgs e)
+    {
+        selectProvince = Convert.ToInt32(e.Value);
+    }
+
+    private void onChangeDistrict(ChangeEventArgs e)
+    {
+        selectDistrict = Convert.ToInt32(e.Value);
+    }
+
+    private void onChangeTown()
+    {
+        //town = Convert.ToString(e.Value);
+        if(town == null || town == "")
+        {
+            css1 = "border-color: red;";
+            warning1 = "Please fill the Town field";
+        }
+        else
+        {
+            css1 = "border-color: green;";
+            warning1 = null;
+        }
+    }
+
+    private void saveData()
+    {
+        
+    }
+
+    private Task modalOk()
+    {
+        return onClose.InvokeAsync(true);
+    }
+
+    private Task modalCancel()
+    {
+        return onClose.InvokeAsync(false);
+    }
+}

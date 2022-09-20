@@ -1,0 +1,105 @@
+﻿
+
+.card-custom {
+    /*background-color: rebeccapurple;*/
+    width: 100%;
+    height: auto;
+    box-shadow: rgb(128, 128, 128,0.7) 1px 1px;
+}
+
+.hdajwak {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wadjwaid {
+    width: 156px;
+    height: auto;
+}
+
+.bdkwadb {
+    border: 2px solid #E9EAED;
+    border-radius: 12px;
+}
+
+.example {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+    ::-webkit-scrollbar:vertical {
+        width: 12px;
+    }
+
+    ::-webkit-scrollbar:horizontal {
+        height: 12px;
+    }
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+button {
+    background-color: white;
+    border: none;
+    font-size: 14px;
+    border-bottom: 1px solid gray;
+    color: #212529;
+}
+
+    button:hover {
+        border-bottom: 2px solid #212529;
+    }
+
+.user-img {
+    background-image: url('/img/user1.png');
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    opacity: 0.9;
+    width: 156px;
+    height: auto;
+}
+
+.edit-buttons {
+    background-color: gray;
+    color: #E9EAE4;
+    font-size: 11px;
+    border-radius: 12px;
+    border: none;
+}
+
+    .edit-buttons:hover {
+        border: none;
+        color: #212529;
+    }
+
+label {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #6B6A6A;
+    font-style: oblique;
+}
+
+.card-header-title {
+    font-size: 14px;
+    color: #212529;
+}
+
+.card-header-info {
+    font-size: 11px;
+    color: #6B6A6A;
+}

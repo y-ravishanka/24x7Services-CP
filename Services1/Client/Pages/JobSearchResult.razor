@@ -1,0 +1,55 @@
+﻿
+@page "/main/searchresult"
+@page "/searchresult/{id}/{jid}"
+@page "/main/searchresult/{id}/{jid}"
+
+@inject HttpClient http
+
+<div class="cus_back_color">
+<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid cus_back_color_2 my-3 px-3">
+            <h1>title</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid cus_width my-2">
+            <div class="container h6 cus_back_color_2 cus_block_border py-3">
+                <div class="row">
+                    <div>information</div>
+                </div>
+                <div class="row py-3">
+                    <div><b>Key Words :</b></div>
+                    <div class="cus_inline_list">
+                        <label>key word 1</label>
+                        <label>key word 2</label>
+                    </div>
+                </div>
+                <div class="row py-1">
+                    <div><b>Budget :</b> @job.price</div>
+                </div>
+                <div class="row py-1">
+                    <div><b>Closing Date :</b> @job.date</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid cus_width my-2">
+            <div class="row">
+                <div class="container cus_back_color_2 cus_block_border py-3">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    [Parameter]
+    public int jid { get; set; }
+
+    private Job job = new();
+}

@@ -1,0 +1,79 @@
+﻿
+@page "/admin/adminreports"
+
+<PageTitle>Reports</PageTitle>
+<div>
+<div class="row report_top_row pb-2">
+    <div class="container-fluid">
+        <div class="row">
+            <h1>Admin Reports - @num</h1>
+        </div>
+        <div class="row">
+            <button class="admin_reload_btn rounded"><span class="oi oi-reload"></span> Reload</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="container-fluid p-3 report_background">
+        <div class="container-fluid rounded bg-white ps-3 pe-5 p-2 my-2">
+            <div class="row edit-buttons-move"></div>
+            <div class="row">
+                <div class="row">
+                    <h5 class="fw-bold">Report Problem</h5>
+                </div>
+                <div class="row">
+                    <div class="fw-bold"><i>User Name</i></div>
+                </div>
+            </div>
+            <div class="row edit-buttons-move">
+                <button class="my-button-dark fw-bold">view</button>
+            </div>
+        </div>
+
+        <div class="container-fluid rounded bg-white ps-3 pe-5 p-2 my-2">
+            <div class="row edit-buttons-move"></div>
+            <div class="row">
+                <div class="row">
+                    <h5 class="fw-bold">Report Problem</h5>
+                </div>
+                <div class="row">
+                    <div class="fw-bold"><i>User Name</i></div>
+                </div>
+            </div>
+            <div class="row edit-buttons-move">
+                <button class="my-button-dark fw-bold">view</button>
+            </div>
+        </div>
+        
+        @for(int i=0;i<20;++i)
+        {
+            var local_i = i;
+            <div class="container-fluid rounded bg-white ps-3 pe-5 p-2 my-2">
+                <div class="row edit-buttons-move"></div>
+                <div class="row">
+                    <div class="row">
+                        <h5 class="fw-bold">Report Problem</h5>
+                    </div>
+                    <div class="row">
+                        <div class="fw-bold"><i>User Name</i></div>
+                    </div>
+                </div>
+                <div class="row edit-buttons-move">
+                    <button class="my-button-dark fw-bold" @onclick="@(e=>viewReport(local_i))">view</button>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+</div>
+
+@code {
+    private string num = "";
+    private int[] rnuma;
+
+    private void viewReport(int rnum)
+    {
+        num = rnum.ToString();
+    }
+}

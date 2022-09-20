@@ -1,0 +1,109 @@
+﻿
+@page "/serviceprofile";
+@page "/main/serviceprofile"
+
+<div class="cus_back_color">
+<div class="container-fluid">
+    <div class="row top_row">
+        <div class="container-fluid  cus_back_color_2 my-3 px-3">
+            <h1>Search Service Providers</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="container-fluid m-2 py-5 cus_back_color_2 cus_block_border">
+                        <div class="row">
+                            <button class="btn btn-dark w-100 my-2">Search</button>
+                        </div>
+                        <div class="row">
+                            <label>Job :</label>
+                            <input class="form-control w-100 mb-2" />
+                        </div>
+                        <div class="row">
+                            <label>Search By :</label>
+                            <select class="w-100 px-1 my-1 py-1" @onchange="changesearch">
+                                <option selected value="0">Job Only</option>
+                                <option value="1">Job and Province</option>
+                                <option value="2">Job, Province and District</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <select class="w-100 px-1 my-1 py-1" @onchange="changeprovince">
+                                <option disabled selected>-- select a province --</option>
+                                @for(int h = 0;h<province.Count;++h)
+                                {
+                                    <option value="@h">@province[h]</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="row">
+                            <select class="w-100 px-1 my-1 py-1" @onchange="changedistrict">
+                                <option disabled selected>-- select a district --</option>
+                                @for(int h = 0;h<distric[selectedprovi].Length;++h)
+                                {
+                                    <option value="@h">@distric[selectedprovi][h]</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="container-fluid m-2 cus_back_color_2 cus_block_border pb-1">
+                        <div class="container-fluid cus_bottom_border">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <h4 class="fw-bold">service provider - name</h4>
+                                    </div>
+                                    <div class="row">
+                                        <h5><i>provided services</i></h5>
+                                    </div>
+                                    <div class="row">
+                                        <h6>little details about the service provider - ndwukan ndjwuakmn, nwhdowhkda jabwhdladwj jwbaldwirnms, wjdkwuurhak kwudhkwajd</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 contant_center">
+                                    <button class="my-button-dark">view</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@code {
+    private readonly DataModal dataModal = new DataModal();
+    private List<string> province = new();
+    private List<string[]> distric = new();
+    private int i, j;
+    private int selectedprovi;
+    private int selecteddis;
+    private int searchby;
+
+    protected override void OnInitialized()
+    {
+        province = dataModal.GetProvince();
+        distric = dataModal.GetDistrict();
+    }
+
+    private void changesearch(ChangeEventArgs e)
+    {
+        searchby = Convert.ToInt32(e.Value);
+    }
+
+    private void changeprovince(ChangeEventArgs e)
+    {
+        selectedprovi = Convert.ToInt32(e.Value);
+    }
+
+    private void changedistrict(ChangeEventArgs e)
+    {
+        selecteddis = Convert.ToInt32(e.Value);
+    }
+}

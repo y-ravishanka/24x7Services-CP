@@ -1,0 +1,121 @@
+﻿
+@page "/userprofile"
+@page "/main/userprofile"
+
+@layout MainLayout
+
+<PageTitle>@pageTitle</PageTitle>
+
+<div class="container-fluid my-4">
+    <div class="container-fluid bdkwadb">
+
+        <div class="row">
+            <div class="container-fluid hdajwak m-2 p-2">
+                <div class="row">
+                    <div class="container-fluid hdajwak">
+                        <img class="wadjwaid" src="/img/user1.png" @onclick="@picEdit">
+                        <div hidden="@pic" class="container-fluid justify-content-center">
+                        <button class="edit-buttons px-2">Edit</button>
+                        <button class="edit-buttons px-2">Delete</button>
+                        <button class="btn-close edit-buttons px-2" @onclick="@picEdit"></button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="d-flex flex-row bd-highlight justify-content-center overflow-auto">
+                <button class="m-1 p-2" style="@css1[0]" @onclick="(e=>clickMenu(0))">Dashboard</button>
+                <button class="m-1 p-2" style="@css1[1]" @onclick="(e=>clickMenu(1))">About</button>
+                <button class="m-1 p-2" style="@css1[2]" @onclick="(e=>clickMenu(2))">Location Info</button>
+                <button class="m-1 p-2" style="@css1[3]" @onclick="(e=>clickMenu(3))">Work Profile</button>
+            </div>
+        </div>
+
+        <div class="row p-1">
+            <div class="w3-content p-3">
+                @if(page == 0)
+                {
+                    <UserDashboard/>
+                }
+                else if(page == 1)
+                {
+                    <UserAbout/>
+                }
+                else if(page == 2)
+                {
+                    <UserLocationInfo/>
+                }
+                else if(page == 3)
+                {
+                    <UserWorkProfile/>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div></div>
+
+@code {
+    private string pageTitle = "User Profile";
+    private bool pic { get; set; } = true;
+    private int page { get; set; } = 0;
+    private string[] css1 = new string[4];
+
+    protected override void OnInitialized()
+    {
+        setStyle();
+        clearStyleButton();
+        setButtonCss(page);
+    }
+
+    private void clearStyleButton()
+    {
+        for (int i=0;i<css1.Length;++i)
+        { css1[i] = ""; }
+    }
+
+    private void setButtonCss(int t)
+    {
+        clearStyleButton();
+        css1[t] = "border-bottom: 2.5px solid #212529; font-size: 15px;";
+    }
+
+    private void setStyle()
+    {
+
+    }
+
+    private void picEdit()
+    {
+        pic = !pic;
+    }
+
+    private void clickDashboard()
+    {
+        setButtonCss(0);
+        page = 0;
+    }
+
+    private void clickAdout()
+    {
+        setButtonCss(1);
+        page = 1;
+    }
+
+    private void clickLocation()
+    {
+        setButtonCss(2);
+        page = 2;
+    }
+
+    private void clickMenu(int t)
+    {
+        setButtonCss(t);
+        page = t;
+    }
+
+}

@@ -1,0 +1,68 @@
+﻿
+<div class="modal fade show" id="myModal" style="display:block; background-color: rgba(10,10,10,.8);" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <EditForm Model="user" OnValidSubmit="@saveData">
+                <DataAnnotationsValidator></DataAnnotationsValidator>
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Basic Informaion</h4>
+                    <button class="close none_button" @onclick="@modalCancel"><span class="oi oi-x"></span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="containt-fluid">
+                        <div class="mb-3">
+                            <label for="nic">NIC :</label><br />
+                            <InputText class="form-control" id="nic" @bind-Value="user.nic"></InputText>
+                            <ValidationMessage For="() => user.nic"></ValidationMessage>
+                        </div>
+                        <div class=" mb-3">
+                            <label for="fname">First Name :</label><br />
+                            <InputText class="form-control" id="fname" @bind-Value="user.fname"></InputText>
+                            <ValidationMessage For="() => user.fname"></ValidationMessage>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lname">Last Name :</label><br />
+                            <InputText class="form-control" id="lname" @bind-Value="user.lname"></InputText>
+                            <ValidationMessage For="() => user.lname"></ValidationMessage>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dname">Display Name :</label><br />
+                            <InputText class="form-control" id="dname" @bind-Value="user.dname"></InputText>
+                            <ValidationMessage For="() => user.dname"></ValidationMessage>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button @onclick="@modalCancel" class="btn my-button-dark">Cancel</button>
+                    <input type="submit" class="btn my-button-dark" value="Save"/>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public EventCallback<bool> onClose { get; set; }
+    [Parameter]
+    public int id { get; set; }
+
+    private UserBasicModel user = new();
+
+    private void saveData()
+    {
+        Console.WriteLine("user about valid submition");
+    }
+
+    private Task modalOk()
+    {
+        saveData();
+        return onClose.InvokeAsync(true);
+    }
+
+    private Task modalCancel()
+    {
+        return onClose.InvokeAsync(false);
+    }
+}

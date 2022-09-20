@@ -1,0 +1,12 @@
+﻿
+
+.cus_page {
+    background-color: #212529;
+}
+
+.none_buttons {
+    border: none;
+    border-style: none;
+    background-color: none;
+    color: white;
+}

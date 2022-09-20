@@ -1,0 +1,39 @@
+﻿
+<div class="modal fade show" id="myModal" style="display:block; background-color: rgba(10,10,10,.8);" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit General Information</h4>
+                <button class="close none_button" @onclick="@modalCancel"><span class="oi oi-x"></span></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button @onclick="@modalCancel" class="btn my-button-dark">Cancel</button>
+                <button @onclick="@saveData" class="btn my-button-dark">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<bool> onClose { get; set; }
+    [Parameter]
+    public int id { get; set; }
+
+    private void saveData()
+    {
+        
+    }
+
+    private Task modalOk()
+    {
+        return onClose.InvokeAsync(true);
+    }
+
+    private Task modalCancel()
+    {
+        return onClose.InvokeAsync(false);
+    }
+}

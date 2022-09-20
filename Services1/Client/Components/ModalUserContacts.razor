@@ -1,0 +1,118 @@
+﻿
+<div class="modal fade show" id="myModal" style="display:block; background-color: rgba(10,10,10,.8);" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Contact Information</h4>
+                <button class="close none_button" @onclick="@modalCancel"><span class="oi oi-x"></span></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="mb-3">
+                        <label for="email">User Email :</label><br />
+                        <input type="text" class="form-control" @bind="@email" style="@css1" />
+                        <label class="warning1">@warning1</label>
+                    </div>
+                    <div class="mb-3">
+                        <label>User Contacts :</label><br />
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="container-fluid">
+                                    <div>
+                                        <button class="m-2 p-2 cus_plus_button"><span class="oi oi-plus"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="container-fluid content-center">
+                                    
+                                    <div class="row py-2 my-1">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" />
+                                            <button class="none_button px-3 cus_add_button">Add</button>
+                                            <button class="none_button cus_addclose_button"><span class="oi oi-x"></span></button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="container-fluid content_center">
+                                    
+                                    <div class="row cus_contact_row py-2 my-1">
+                                        <div class="col-10">
+                                            <div>
+                                                0785942861
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div>
+                                                <button class="none_button"><span class="oi oi-x"></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button @onclick="@modalCancel" class="btn my-button-dark">Cancel</button>
+                <button @onclick="@saveData" class="btn my-button-dark">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<bool> onClose { get; set; }
+    [Parameter]
+    public int id { get; set; }
+    private string? warning1;
+    private string? email;
+    private ICalculations cal = new Calculations();
+    private List<UserContactData> contact = new();
+    private string? css1 = null;
+
+    private UserBasicModel user = new();
+
+
+
+    private void saveData()
+    {
+        if(email == null)
+        {
+            css1 = "border-color: red;";
+            warning1 = "Please Enter an Email Address";
+            StateHasChanged();
+        }
+        else
+        {
+            if(cal.ValidEmail(email))
+            {
+                css1 = "border-color: green;";
+                warning1 = null;
+                StateHasChanged();
+                Console.WriteLine("user about valid submition");
+            }
+            else
+            {
+                css1 = "border-color: red;";
+                warning1 = "Please Enater an Valid Email";
+                StateHasChanged();
+            }
+        }
+    }
+
+    private Task modalOk()
+    {
+        saveData();
+        return onClose.InvokeAsync(true);
+    }
+
+    private Task modalCancel()
+    {
+        return onClose.InvokeAsync(false);
+    }
+}
